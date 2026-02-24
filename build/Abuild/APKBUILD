@@ -1,0 +1,29 @@
+pkgname=zlib
+pkgver=1.3.1
+pkgrel=0
+pkgdesc="A compression/decompression Library"
+arch="all"
+license="Zlib"
+url="https://zlib.net/"
+subpackages="$pkgname-static $pkgname-dev $pkgname-doc"
+source="https://zlib.net/fossils/zlib-$pkgver.tar.gz
+    fix-qnx.patch
+"
+
+build() {
+    # we trade size for a little more speed.
+    export CFLAGS="$CFLAGS -O3 -fPIC"
+    ./configure \
+        --prefix=/usr \
+        --shared
+    make
+}
+
+package() {
+    make install DESTDIR="$pkgdir"
+}
+
+sha512sums="
+580677aad97093829090d4b605ac81c50327e74a6c2de0b85dd2e8525553f3ddde17556ea46f8f007f89e435493c9a20bc997d1ef1c1c2c23274528e3c46b94f  zlib-1.3.1.tar.gz
+bf34396fd85cfc0ee6e2eb02fce1513f49a1708facde0af0385a5e10da172cf5570f46b31a92dbd2dde8620f25348e70d7fcb461a478578cc7d9ba6601ed583e  fix-qnx.patch
+"

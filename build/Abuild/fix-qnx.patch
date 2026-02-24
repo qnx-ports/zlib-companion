@@ -1,0 +1,22 @@
+diff '--color=auto' -Naur zlib-1.3.1.orig/configure zlib-1.3.1/configure
+--- zlib-1.3.1.orig/configure	2025-04-09 15:32:29.312976976 -0400
++++ zlib-1.3.1/configure	2025-04-09 15:33:55.893609632 -0400
+@@ -227,7 +227,7 @@
+     uname=`(uname -s || echo unknown) 2>/dev/null`
+   fi
+   case "$uname" in
+-  Linux* | linux* | *-linux* | GNU | GNU/* | solaris*)
++  Linux* | linux* | *-linux* | GNU | GNU/* | solaris* | *nto-qnx*)
+         case "$mname" in
+         *sparc*)
+             LDFLAGS="${LDFLAGS} -Wl,--no-warn-rwx-segments" ;;
+@@ -244,9 +244,6 @@
+         LDSHARED=${LDSHARED-"$cc -shared"}
+         LDSHAREDLIBC=""
+         EXE='.exe' ;;
+-  QNX*) # This is for QNX6. I suppose that the QNX rule below is for QNX2,QNX4
+-        # (alain.bonnefoy@icbt.com)
+-        LDSHARED=${LDSHARED-"$cc -shared -Wl,-hlibz.so.1"} ;;
+   HP-UX*)
+         LDSHARED=${LDSHARED-"$cc -shared $SFLAGS"}
+         case `(uname -m || echo unknown) 2>/dev/null` in
